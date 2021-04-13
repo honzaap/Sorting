@@ -1,3 +1,3 @@
-# Sorting
+# Sorting Visualizer
 Vizualizace řadících algoritmů jako Merge Sort, Heap Sort a další... 
 Pro vyzkoušení přejděte na tuto stránku https://honzaap.github.io/Sorting/
