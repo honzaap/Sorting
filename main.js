@@ -11,6 +11,7 @@ const RUN = 32;
 
 const window_y = array_HTML.scrollHeight;
 const window_x = array_HTML.scrollWidth;
+let sorted = false;
 let line_size ;
 let is_running = false;
 
@@ -45,7 +46,7 @@ async function shuffle() {
         array_HTML.appendChild(line_HTML);
         await sleep(1);
     }
-
+    sorted = false;
     is_running = false;
 }
 
@@ -106,6 +107,7 @@ async function CreateRandomCollection()
 async function Run()
 {
     if(is_running) return;
+    if(sorted) await shuffle();
     is_running = true;
     let algo = algo_select.value;
     switch (algo){
@@ -128,6 +130,7 @@ async function Run()
             await InsertionSort(array, 0, array.length);
             break;
     }
+    sorted = true;
     is_running = false;
 }
 
