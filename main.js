@@ -100,6 +100,7 @@ async function CreateRandomCollection()
         array_HTML.appendChild(line_HTML);
         await sleep(1);
     }
+    sorted = false;
     is_running = false;
 }
 
