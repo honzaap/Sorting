@@ -1,58 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <title>Vizualizace řadících algoritmů</title>
-    <link rel="stylesheet" href="typo.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="sort.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-    <link rel="icon" href="sort-descending.svg">
-</head>
-<body>
-    <div class="page">
-        <header>
-            <nav class="navbar">
-                <div class="navbar-item">
-                    <div class="custom-select">
-                        <select id="algo-select">
-                            <option value="BubbleSort">Bubble Sort</option>
-                            <option value="MergeSort">Merge Sort</option>
-                            <option value="QuickSort">Quick Sort</option>
-                            <option value="HeapSort">Heap Sort</option>
-                            <option value="InsertionSort">Insertion Sort</option>
-                            <option value="SelectionSort">Selection Sort</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="navbar-item">
-                    <button class="general-button start-button" onclick="Run()">Začít vizualizaci</button>
-                </div>
-                <div class="navbar-item">
-                    <button class="general-button options-button" onclick="shuffle();">Zamíchat list</button>
-                </div>
-                <div class="navbar-item">
-                    <button class="general-button options-button" onclick="CreateRandomCollection();">Vytvořit náhodnou kolekci</button>
-                </div>
-                <div class="navbar-item">
-                    <span class="range-caption">Rozsah kolekce</span>
-                    <input class="range-collection" id="range-collection" type="range" value="50" min="5" max="150">
-                </div>
-            </nav>
-        </header>
-        <div class="algo-desc-container">
-            <p id="algo-desc">Buble Sort má časovou komplexitu O(<var>n</var><sup>2</sup>).</p>
-        </div>
-        <div class="main-array-container">
-            <div class="array" id="array">
-
-            </div>
-        </div>
-    </div>
-    <script src="main.js" async></script>
-    <script src="select.js" async></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
