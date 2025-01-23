@@ -59,7 +59,7 @@ async function animate(time) {
     if (manager.isRunning()) {
         manager.step();
     }
-    
+
     //await sleep(2);
     /*
     if (current < collection.length) {
@@ -77,7 +77,7 @@ async function animate(time) {
 
     //await sleep(400);
 
-    //requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 }
 
 

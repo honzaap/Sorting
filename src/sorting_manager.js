@@ -47,7 +47,7 @@ export default class SortingManager {
         this.#currentAlgorithm = algorithm;
     }
 
-    createCollection(size = 10) {
+    createCollection(size = 20) {
         const collection = [];
         for (let i = 0; i < size; i++) {
             const number = Math.floor(Math.random() * max) + min;
@@ -86,7 +86,7 @@ export default class SortingManager {
             return true;
 
         this.#inStep = true;
-        const result = ! (await this.#currentAlgorithm.step());
+        const result = await this.#currentAlgorithm.step();
         if (!result) {
             this.#currentAlgorithm.end();
             this.#isRunning = false;
@@ -108,7 +108,7 @@ export default class SortingManager {
      * 
      * @param {Node} node1 
      * @param {Node} node2 
-     * @returns {void}
+     * @returns {Promise}
      */
     swap(node1, node2) {
         const afterResolve = resolve => {
@@ -116,19 +116,22 @@ export default class SortingManager {
             node1.svg.replaceChildren([]);
             node2.svg.replaceChildren([]);
             
+            // Swap svg coords
             const temp = node1.svg.getAttribute("x");
             node1.svg.setAttribute("x", node2.svg.getAttribute("x"));
             node2.svg.setAttribute("x", temp);
 
-            const temp2 = this.collection.indexOf(node2);
-            this.collection[this.collection.indexOf(node1)] = node2;
-            this.collection[temp2] = node1;
+            // Swap nodes in array
+            const index1 = this.collection.indexOf(node1);
+            const index2 = this.collection.indexOf(node2);
+            this.collection[index1] = node2;
+            this.collection[index2] = node1;
     
             resolve();
         }
     
         return new Promise((resolve) => {
-            const duration = 1000;
+            const duration = 200;
     
             function addAnimation(rect, fromX, toX) {
                 const animateElement = document.createElementNS(NS, "animate");
