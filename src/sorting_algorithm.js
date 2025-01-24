@@ -15,6 +15,7 @@ export default class SortingAlgorithm {
     manager;
 
     /**
+     * Initialize everything needed for the algorithm
      * @param {Node[]} collection
      * @returns {void}
     */
@@ -24,11 +25,13 @@ export default class SortingAlgorithm {
     }
 
     /**
+     * Perform one step of the algorithm
      * @returns {Promise<boolean>} True if more steps remain, False if algorithm is finished
     */
     async step() {}
 
     /**
+     * Finalize algorithm and/or clean up
      * @returns {void}
     */
     end() {}

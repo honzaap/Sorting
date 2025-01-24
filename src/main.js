@@ -8,46 +8,31 @@ const svg = document.getElementById("sortingSvg");
 const createBtn = document.getElementById("create");
 const runBtn = document.getElementById("run");
 const stepBtn = document.getElementById("step");
+const animateBtn = document.getElementById("animate");
 
 createBtn.onclick = createCollection;
-stepBtn.onclick = animate;
+stepBtn.onclick = step;
 runBtn.onclick = runAlgorithm;
-
-const collection = [3, 19, 5, 44, 12, 4, 23, 6, 9, 1, 59, 33, 22];
-const collectionSvg = [];
+animateBtn.onclick = animate;
 
 // Animation vars
 let start;
-let current = 1;
 
 const manager = new SortingManager(svg);
 manager.setAlgorithm(new BubbleSort());
 
 function createCollection() {
     manager.createCollection();
-    
-
-    /* let x = 100;
-    let y = 20;
-    let width = 15;
-
-    for (const item of collection) {
-        let height = item * 10;
-        const rect = document.createElementNS(NS, "rect");
-        rect.setAttribute("x", x);
-        rect.setAttribute("y", y);
-        rect.setAttribute("height", height);
-        rect.setAttribute("width", width);
-        rect.setAttribute("fill", "#ff0000");
-        svg.appendChild(rect);
-        collectionSvg.push(rect);
-
-        x += width * 2;
-    }*/ 
 }
 
 function runAlgorithm() {
     manager.start();
+}
+
+async function step() {
+    if (manager.isRunning()) {
+        manager.step();
+    }
 }
 
 async function animate(time) {
@@ -60,25 +45,7 @@ async function animate(time) {
         manager.step();
     }
 
-    //await sleep(2);
-    /*
-    if (current < collection.length) {
-        const rect1 = collectionSvg[current];
-        const rect2 = collectionSvg[current - 1];
-
-        await animateSwap(rect1, rect2);
-        const temp = collectionSvg[current];
-        collectionSvg[current] = collectionSvg[current - 1];
-        collectionSvg[current - 1] = temp;
-
-        current++;
-    }
-    */
-
-    //await sleep(400);
-
     requestAnimationFrame(animate);
 }
-
 
   

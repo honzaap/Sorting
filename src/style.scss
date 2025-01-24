@@ -11,5 +11,9 @@
 
     svg {
         width: 100%;
+
+        * {
+            transition: fill 100ms ease;
+        }
     }
 }

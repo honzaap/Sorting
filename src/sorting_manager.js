@@ -2,8 +2,8 @@ import { NS } from "./helpers";
 import Node from "./node";
 import SortingAlgorithm from "./sorting_algorithm";
 
-const min = 1;
-const max = 100;
+const min = 10;
+const max = 30;
 
 export default class SortingManager {
     /**
@@ -47,7 +47,7 @@ export default class SortingManager {
         this.#currentAlgorithm = algorithm;
     }
 
-    createCollection(size = 20) {
+    createCollection(size = 18) {
         const collection = [];
         for (let i = 0; i < size; i++) {
             const number = Math.floor(Math.random() * max) + min;
