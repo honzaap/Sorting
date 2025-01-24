@@ -4,17 +4,107 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sorting algoritmh visualizer</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <button id="create">create</button>
-        <button id="run">run</button>
-        <button id="step">step</button>
-        <button id="animate">animate</button>
-        <div class="sorting-container">
-            <svg class="sorting-svg" id="sortingSvg" viewBox="0 0 1000 500">
-            </svg>
-        </div>
+        <header>
+            <nav>
+                <div class="select-container">
+                    <button class="select">
+                        <span>Bubble sort</span>
+                        <img src="./arrow_right.svg" alt="Arrow"/>
+                    </button>
+                    <div class="select-options" id="selectAlgo">
+                        <button data-algo="test1">Bubble sort</button>
+                        <button data-algo="test2">Merge sort</button>
+                        <button data-algo="test3">Insert sort</button>
+                        <button data-algo="test4">Quick sort</button>
+                    </div>
+                    <span class="arrow"></span>
+                </div>
+                <div class="play-group">
+                    <button class="btn-circle btn-play" id="play">
+                        <img class="play" src="./arrow_right.svg" alt="Play" />
+                        <img class="stop" src="./pause.svg" alt="Pause" />
+                    </button>
+                    <button class="btn-circle small" id="step">
+                        <img src="./forward.svg" alt="Step" />
+                    </button>
+                </div>
+                <div class="range">
+                    <span class="caption">Animation speed</span>
+                    <input id="animationSpeed" type="range" value="30" min="7" max="100">
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section class="section-sorting">
+                <div class="sorting-container">
+                    <svg class="sorting-svg" id="sortingSvg" viewBox="0 0 1000 650"></svg>
+                </div>
+            </section>
+            <section class="section-info">
+                <h3>Bubble sort</h3>
+                <div class="table" id="table">
+                    <div class="part">
+                        <div class="head">Time complexity</div>
+                        <div class="content">
+                            <div class="col">
+                                <div class="row">Best</div>
+                                <div class="row">O(n)</div>
+                            </div>
+                            <div class="col">
+                                <div class="row">Average</div>
+                                <div class="row">O(n²)</div>
+                            </div>
+                            <div class="col">
+                                <div class="row">Worst</div>
+                                <div class="row">O(n²)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="part">
+                        <div class="head">Space complexity</div>
+                        <div class="content">
+                            <div class="col">
+                                <div class="row"></div>
+                                <div class="row">O(1)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-settings">
+                    <div class="section">
+                        <textarea id="collectionField"></textarea>
+                    </div>
+                    <div class="section">
+                        <div class="range">
+                            <span class="caption">Collection size</span>
+                            <input id="collectionSize" type="range" value="20" min="5" max="140">
+                        </div>
+                        <button id="createNewCollection" class="btn-dark">Create new collection</button>
+                        <button id="shuffleCollection" class="btn-dark">Shuffle collection</button>
+                    </div>
+                </div>
+            </section>
+        </main>
        
         <script type="module" src="./src/main.js"></script>
+
+        <script>
+            const sliders = document.querySelectorAll("input[type='range']");
+
+            for (const slider of sliders) {
+                const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+                slider.style.setProperty("--value", `${value}%`);
+                slider.addEventListener("input", function () {
+                    const value = (this.value - this.min) / (this.max - this.min) * 100;
+                    this.style.setProperty("--value", `${value}%`);
+                });
+            }
+         
+        </script>
     </body>
 </html>

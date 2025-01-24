@@ -1,3 +1,4 @@
+import NodeState from "./enums/node_state";
 import Node from "./node";
 import SortingManager from "./sorting_manager";
 
@@ -22,6 +23,10 @@ export default class SortingAlgorithm {
     start(collection, manager) {
         this.collection = collection;
         this.manager = manager;
+
+        for (const node of this.collection) {
+            node.setState(NodeState.Idle);
+        }
     }
 
     /**

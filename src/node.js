@@ -21,15 +21,17 @@ export default class Node {
 
     /**
      * @param {String} value 
+     * @param {Number} width 
     */
     state = NodeState.Idle;
 
-    constructor(value) {
+    constructor(value, width) {
         this.value = value;
+        this.width = width;
         this.svg = document.createElementNS(NS, "rect");
         this.svg.setAttribute("height", this.#calculateHeight());
-        this.svg.setAttribute("width", 15);
-        this.svg.setAttribute("y", 500 - this.#calculateHeight());
+        this.svg.setAttribute("width", width);
+        this.svg.setAttribute("y", 651 - this.#calculateHeight());
         this.setState(NodeState.Idle);
     }
 
@@ -43,13 +45,13 @@ export default class Node {
     setState(state) {
         switch (state) {
             case NodeState.Idle:
-                this.svg.setAttribute("fill", "#28bbe6");
+                this.svg.setAttribute("fill", "#6180B9");
                 break;
             case NodeState.Sorted:
-                this.svg.setAttribute("fill", "#26d346");
+                this.svg.setAttribute("fill", "#61B96E");
                 break;
             case NodeState.Current:
-                this.svg.setAttribute("fill", "#ec9732");
+                this.svg.setAttribute("fill", "#D4A932");
                 break;
             case NodeState.OnHold:
                 this.svg.setAttribute("fill", "#ecd80c");

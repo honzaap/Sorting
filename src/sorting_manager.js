@@ -3,7 +3,7 @@ import Node from "./node";
 import SortingAlgorithm from "./sorting_algorithm";
 
 const min = 10;
-const max = 30;
+const max = 120;
 
 export default class SortingManager {
     /**
@@ -32,11 +32,28 @@ export default class SortingManager {
     svg;
 
     /**
+     * @type {HTMLTextAreaElement}
+    */
+    collectionField;
+
+    /**
+     * @type {HTMLElement} 
+    */
+    table;
+
+    /**
+     * @type {Number} 
+    */
+    #speed = 10;
+
+    /**
      * @param {SVGElement} svg
      * @constructor 
      */
-    constructor(svg) {
+    constructor(svg, collectionField, table) {
         this.svg = svg;
+        this.collectionField = collectionField;
+        this.table = table;
     }
 
     /**
@@ -48,23 +65,42 @@ export default class SortingManager {
     }
 
     createCollection(size = 18) {
+        const gap = 50 / size;
+        const width = 900 / (size + gap);
+
         const collection = [];
         for (let i = 0; i < size; i++) {
-            const number = Math.floor(Math.random() * max) + min;
-            const node = new Node(number);
+            const number = Math.floor(Math.random() * (max - min)) + min;
+            const node = new Node(number, width);
             collection.push(node);
         }
 
         this.collection = collection;
         this.svg.replaceChildren([]);
 
-        let x = 100;
+        // Create svg elements
+        let x = (1000 / 2) - (size / 2 * (width + gap));
         for (const item of this.collection) {
             item.svg.setAttribute("x", x);
         
-            x += item.width * 2;
+            x += gap + width;
             this.svg.appendChild(item.svg);
         }
+
+        this.updateCollectionField();
+    }
+
+    updateCollectionField() {
+        // Create numbers in text field
+        this.collectionField.textContent = this.collection.map(x => x.value).join("\n");
+    }
+
+    changeSpeed(speed) {
+        this.#speed = (speed ** 1.65) / 2500;
+    }
+
+    getSpeed() {
+        return this.#speed * (this.collection.length ** 2);
     }
 
     start() {
@@ -75,6 +111,10 @@ export default class SortingManager {
         this.#currentAlgorithm.start(this.collection, this);
 
         return true;
+    }
+
+    stop() {
+        this.#isRunning = false;
     }
 
     async step() {
@@ -93,6 +133,7 @@ export default class SortingManager {
         }
 
         this.#inStep = false;
+        this.updateCollectionField();
 
         return result;
     }
@@ -131,7 +172,7 @@ export default class SortingManager {
         }
     
         return new Promise((resolve) => {
-            const duration = 200;
+            const duration = 2000 / this.getSpeed();
     
             function addAnimation(rect, fromX, toX) {
                 const animateElement = document.createElementNS(NS, "animate");

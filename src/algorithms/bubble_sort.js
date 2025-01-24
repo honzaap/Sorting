@@ -30,10 +30,10 @@ export default class BubbleSort extends SortingAlgorithm {
         if(node2.value < node1.value){
             this.#prevNode1 = node2;
             await this.manager.swap(node1, node2);
-            await sleep(50); // For animation clarity
+            await sleep(500 / this.manager.getSpeed()); // For animation clarity
         }
         else {
-            await sleep(170); // For animation clarity
+            await sleep(1700 / this.manager.getSpeed()); // For animation clarity
         }
 
         this.#j++;
