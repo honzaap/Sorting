@@ -1,4 +1,6 @@
 import BubbleSort from "./algorithms/bubble_sort";
+import MergeSort from "./algorithms/merge_sort";
+import SelectionSort from "./algorithms/selection_sort";
 import SortingManager from "./sorting_manager";
 import "./style.scss";
 
@@ -31,7 +33,7 @@ collectionSize.onchange = e => changeCollectionSize(Number.parseInt(e.target.val
 let animationOn = false;
 
 const manager = new SortingManager(svg, collectionField, table);
-manager.setAlgorithm(new BubbleSort());
+manager.setAlgorithm(new SelectionSort());
 
 let size = Number.parseInt(collectionSize.value);
 
@@ -60,7 +62,7 @@ function changeCollectionSize(newSize) {
 }
 
 function shuffleCollection() {
-
+    manager.shuffleCollection();
 }
 
 function createCollection() {

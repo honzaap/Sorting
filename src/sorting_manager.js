@@ -90,6 +90,10 @@ export default class SortingManager {
         this.updateCollectionField();
     }
 
+    shuffleCollection() {
+
+    }
+
     updateCollectionField() {
         // Create numbers in text field
         this.collectionField.textContent = this.collection.map(x => x.value).join("\n");
@@ -100,7 +104,7 @@ export default class SortingManager {
     }
 
     getSpeed() {
-        return this.#speed * (this.collection.length ** 2);
+        return this.#speed * (this.collection.length);
     }
 
     start() {
