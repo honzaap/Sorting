@@ -1,5 +1,9 @@
+import BogoSort from "./algorithms/bogo_sort";
 import BubbleSort from "./algorithms/bubble_sort";
+import CombSort from "./algorithms/comb_sort";
+import InsertionSort from "./algorithms/insertion_sort";
 import MergeSort from "./algorithms/merge_sort";
+import QuickSort from "./algorithms/quick_sort";
 import SelectionSort from "./algorithms/selection_sort";
 import SortingManager from "./sorting_manager";
 import "./style.scss";
@@ -7,6 +11,7 @@ import "./style.scss";
 // HTML Elements
 const svg = document.getElementById("sortingSvg");
 const table = document.getElementById("table");
+const selectAlgoBtn = document.getElementById("selectAlgoBtn");
 const selectAlgo = document.getElementById("selectAlgo");
 const playBtn = document.getElementById("play");
 const stepBtn = document.getElementById("step");
@@ -32,8 +37,9 @@ collectionSize.onchange = e => changeCollectionSize(Number.parseInt(e.target.val
 // Animation vars
 let animationOn = false;
 
-const manager = new SortingManager(svg, collectionField, table);
-manager.setAlgorithm(new SelectionSort());
+const manager = SortingManager.getInstance();
+manager.configure(svg, collectionField, table);
+manager.setAlgorithm(new CombSort());
 
 let size = Number.parseInt(collectionSize.value);
 
@@ -46,6 +52,10 @@ function play() {
         manager.start();
         requestAnimationFrame(animate);
         playBtn.classList.add("active");
+        shuffleCollectionBtn.disabled = true;
+        createNewCollectionBtn.disabled = true;
+        selectAlgoBtn.disabled = true;
+        collectionField.disabled = true;
     }
 }
 
@@ -66,12 +76,19 @@ function shuffleCollection() {
 }
 
 function createCollection() {
+    if (animationOn) return;
+
     manager.createCollection(size);
 }
 
 function stop() {
     animationOn = false;
     playBtn.classList.remove("active");
+
+    shuffleCollectionBtn.disabled = false;
+    createNewCollectionBtn.disabled = false;
+    selectAlgoBtn.disabled = false;
+    collectionField.disabled = false;
 }
 
 async function step() {

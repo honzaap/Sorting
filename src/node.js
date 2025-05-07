@@ -3,7 +3,7 @@ import NodeState from "./enums/node_state";
 
 export default class Node {
     /**
-     * @type {number}
+     * @type {Number}
      * @constant
     */
     value;
@@ -19,12 +19,16 @@ export default class Node {
     */
     width = 15;
 
+
+    /**
+     * @type {NodeState}
+     */
+    state = NodeState.Idle;
+
     /**
      * @param {String} value 
      * @param {Number} width 
     */
-    state = NodeState.Idle;
-
     constructor(value, width) {
         this.value = value;
         this.width = width;
@@ -57,10 +61,11 @@ export default class Node {
                 this.svg.setAttribute("fill", "#ecd80c");
                 break;
             case NodeState.InAction:
-                this.svg.setAttribute("fill", "#dfb110");
+                this.svg.setAttribute("fill", "#e68c10");
                 break;
             default:
                 throw new Error("Invalid state");
         }
+        this.state = state;
     }
 }

@@ -1,3 +1,4 @@
+import NodeState from "./enums/node_state";
 import { NS } from "./helpers";
 import Node from "./node";
 import SortingAlgorithm from "./sorting_algorithm";
@@ -47,10 +48,30 @@ export default class SortingManager {
     #speed = 10;
 
     /**
-     * @param {SVGElement} svg
+     * @type {SortingManager}
+     */
+    static #instance;
+
+    /**
+     * @private
      * @constructor 
      */
-    constructor(svg, collectionField, table) {
+    constructor() { }
+
+    static getInstance() {
+        if (!this.#instance)
+            this.#instance = new SortingManager();
+    
+        return this.#instance;
+    }
+
+    /**
+     * 
+     * @param {SVGElement} svg 
+     * @param {HTMLTextAreaElement} collectionField 
+     * @param {HTMLElement} table 
+     */
+    configure(svg, collectionField, table) {
         this.svg = svg;
         this.collectionField = collectionField;
         this.table = table;
@@ -65,6 +86,10 @@ export default class SortingManager {
     }
 
     createCollection(size = 18) {
+        if (this.isRunning()) {
+            this.stop();
+        }
+
         const gap = 50 / size;
         const width = 900 / (size + gap);
 
@@ -90,8 +115,15 @@ export default class SortingManager {
         this.updateCollectionField();
     }
 
-    shuffleCollection() {
-
+    async shuffleCollection() {
+        this.stop();
+        for (let i = this.collection.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            await this.swap(this.collection[i], this.collection[j], false);
+            this.collection[i].setState(NodeState.Idle);
+            this.collection[j].setState(NodeState.Idle);
+        }
+        this.updateCollectionField();
     }
 
     updateCollectionField() {
@@ -112,7 +144,7 @@ export default class SortingManager {
             return false;
 
         this.#isRunning = true;
-        this.#currentAlgorithm.start(this.collection, this);
+        this.#currentAlgorithm.start(this.collection);
 
         return true;
     }
@@ -121,6 +153,10 @@ export default class SortingManager {
         this.#isRunning = false;
     }
 
+    /**
+     * Performs a single step of the currently selected algorithm
+     * @returns {Promise<boolean>} true if there are any steps left
+     */
     async step() {
         if (!this.#currentAlgorithm)
             throw new Error("Current algorithm is null");
@@ -155,7 +191,7 @@ export default class SortingManager {
      * @param {Node} node2 
      * @returns {Promise}
      */
-    swap(node1, node2) {
+    swap(node1, node2, animation = true) {
         const afterResolve = resolve => {
             // Clean up after animation ends
             node1.svg.replaceChildren([]);
@@ -176,7 +212,7 @@ export default class SortingManager {
         }
     
         return new Promise((resolve) => {
-            const duration = 2000 / this.getSpeed();
+            const duration = !animation ? 0 : 2000 / this.getSpeed();
     
             function addAnimation(rect, fromX, toX) {
                 const animateElement = document.createElementNS(NS, "animate");

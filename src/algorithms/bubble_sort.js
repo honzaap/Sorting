@@ -6,12 +6,13 @@ export default class BubbleSort extends SortingAlgorithm {
     #i = 0;
     #j = 0;
 
-    #prevNode1;
+    #prevNode;
 
     start(collection, manager) {
         super.start(collection, manager);
         this.#i = 0;
         this.#j = 0;
+        this.#prevNode = null;
     }
     
     async step() {
@@ -20,15 +21,15 @@ export default class BubbleSort extends SortingAlgorithm {
         const node1 = this.collection[this.#j];
         const node2 = this.collection[this.#j+1];
 
-        this.#prevNode1?.setState(NodeState.Idle);
+        this.#prevNode?.setState(NodeState.Idle);
         node1.setState(NodeState.Current);
         node2.setState(NodeState.Current);
 
-        this.#prevNode1 = node1;
+        this.#prevNode = node1;
 
         // Swap items
         if(node2.value < node1.value){
-            this.#prevNode1 = node2;
+            this.#prevNode = node2;
             await this.manager.swap(node1, node2);
             await sleep(500 / this.manager.getSpeed()); // For animation clarity
         }

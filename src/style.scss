@@ -113,6 +113,11 @@ nav {
     &:active {
         transform: scale(0.96);
     }
+
+    &:disabled {
+        opacity: 0.8;
+        pointer-events: none;
+    }
 }
 
 .select-container {
@@ -152,6 +157,11 @@ nav {
 
         &:hover {
             background-color: #333;
+        }
+
+        &:disabled {
+            opacity: 0.8;
+            pointer-events: none;
         }
     }
 
@@ -317,6 +327,10 @@ h3 {
         min-height: 50vh;
         font-size: 16px;
         padding: 4px 6px;
+
+        &:disabled {
+            cursor: not-allowed;
+        }
 
         @media (max-width:  768px) {
             min-height: 200px;
