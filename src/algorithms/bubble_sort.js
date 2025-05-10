@@ -6,6 +6,7 @@ export default class BubbleSort extends SortingAlgorithm {
     #i = 0;
     #j = 0;
 
+    #swapped = [];
     #prevNode;
 
     start(collection, manager) {
@@ -13,6 +14,7 @@ export default class BubbleSort extends SortingAlgorithm {
         this.#i = 0;
         this.#j = 0;
         this.#prevNode = null;
+        this.#swapped = [true];
     }
     
     async step() {
@@ -27,14 +29,19 @@ export default class BubbleSort extends SortingAlgorithm {
 
         this.#prevNode = node1;
 
+        if (!this.#swapped[this.#i]) {
+            this.collection.forEach(i => i.setState(NodeState.Sorted));
+            return false;
+        }
+
         // Swap items
         if(node2.value < node1.value){
             this.#prevNode = node2;
             await this.manager.swap(node1, node2);
-            await sleep(500 / this.manager.getSpeed()); // For animation clarity
+            this.#swapped[this.#i + 1] = true;
         }
         else {
-            await sleep(1700 / this.manager.getSpeed()); // For animation clarity
+            await sleep(1300 / this.manager.getSpeed()); // For animation clarity
         }
 
         this.#j++;
@@ -53,4 +60,21 @@ export default class BubbleSort extends SortingAlgorithm {
 
         return this.#i < this.collection.length - 1;
     }
+
+    static get name() {
+        return "Bubble Sort";
+    }
+
+    static get timeComplexity() {
+        return {
+            best: "O(n)",
+            average: "O(n²)",
+            worst: "O(n²)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(1)";
+    }
+
 }

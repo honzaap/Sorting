@@ -1,10 +1,4 @@
-import BogoSort from "./algorithms/bogo_sort";
-import BubbleSort from "./algorithms/bubble_sort";
-import CombSort from "./algorithms/comb_sort";
-import InsertionSort from "./algorithms/insertion_sort";
-import MergeSort from "./algorithms/merge_sort";
-import QuickSort from "./algorithms/quick_sort";
-import SelectionSort from "./algorithms/selection_sort";
+import Mapper from "./algorithms/algo_mapper";
 import SortingManager from "./sorting_manager";
 import "./style.scss";
 
@@ -23,8 +17,10 @@ const shuffleCollectionBtn = document.getElementById("shuffleCollection");
 
 // Handle algo change
 for (const btn of selectAlgo.children) {
-    btn.onclick = () => changeAlgorithm(btn.getAttribute("data-algo"));
+    btn.onclick = () => changeAlgorithm(btn.getAttribute("data-algo"), btn.innerHTML);
 }
+
+collectionField.onchange = modifyCollection;
 
 // Button events
 playBtn.onclick = play;
@@ -39,7 +35,7 @@ let animationOn = false;
 
 const manager = SortingManager.getInstance();
 manager.configure(svg, collectionField, table);
-manager.setAlgorithm(new CombSort());
+changeAlgorithm("bubble", "Bubble sort");
 
 let size = Number.parseInt(collectionSize.value);
 
@@ -59,8 +55,17 @@ function play() {
     }
 }
 
-function changeAlgorithm(algorithm) {
-    console.log(algorithm);
+function changeAlgorithm(algorithm, name) {
+    stop();
+    const algo = Mapper[algorithm];
+    manager.setAlgorithm(new algo());
+    selectAlgoBtn.innerHTML = name;
+
+    document.querySelector(".algo-name").textContent = algo.name;
+    table.querySelector(".tc-best").textContent = algo.timeComplexity.best;
+    table.querySelector(".tc-average").textContent = algo.timeComplexity.average;
+    table.querySelector(".tc-worst").textContent = algo.timeComplexity.worst;
+    table.querySelector(".sc").textContent = algo.spaceComplexity;
 }
 
 function changeAnimationSpeed(speed) {
@@ -79,6 +84,16 @@ function createCollection() {
     if (animationOn) return;
 
     manager.createCollection(size);
+}
+
+function modifyCollection() {
+    try {
+        const collection = collectionField.value.trim().split("\n").filter(s => !!s).map(s => Number.parseInt(s.trim()));
+        manager.createCollection(collection.length, collection);
+    }
+    catch (e) {
+        console.error("Cannot replace collection", e);
+    }
 }
 
 function stop() {

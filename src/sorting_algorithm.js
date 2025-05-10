@@ -43,4 +43,20 @@ export default class SortingAlgorithm {
      * @returns {void}
     */
     end() {}
+
+    static get name() {
+        return "Algorithm";
+    }
+    
+    static get timeComplexity() {
+        return {
+            best: "O(n log n)",
+            average: "O(n log n)",
+            worst: "O(n log n)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(1)";
+    }
 }

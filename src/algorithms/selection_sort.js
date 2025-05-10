@@ -60,4 +60,21 @@ export default class SelectionSort extends SortingAlgorithm {
 
         return true; // Keep going
     }
+
+    static get name() {
+        return "Selection Sort";
+    }
+
+    static get timeComplexity() {
+        return {
+            best: "O(n²)",
+            average: "O(n²)",
+            worst: "O(n²)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(1)";
+    }
+
 }

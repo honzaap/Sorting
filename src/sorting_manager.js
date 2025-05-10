@@ -83,9 +83,10 @@ export default class SortingManager {
     */
     setAlgorithm(algorithm) {
         this.#currentAlgorithm = algorithm;
+        this.reset();
     }
 
-    createCollection(size = 18) {
+    createCollection(size = 18, existingCollection = []) {
         if (this.isRunning()) {
             this.stop();
         }
@@ -95,7 +96,8 @@ export default class SortingManager {
 
         const collection = [];
         for (let i = 0; i < size; i++) {
-            const number = Math.floor(Math.random() * (max - min)) + min;
+            const number = existingCollection[i] ?? Math.floor(Math.random() * (max - min)) + min;
+            console.log(number);
             const node = new Node(number, width);
             collection.push(node);
         }
@@ -120,15 +122,14 @@ export default class SortingManager {
         for (let i = this.collection.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             await this.swap(this.collection[i], this.collection[j], false);
-            this.collection[i].setState(NodeState.Idle);
-            this.collection[j].setState(NodeState.Idle);
         }
+        this.reset();
         this.updateCollectionField();
     }
 
     updateCollectionField() {
         // Create numbers in text field
-        this.collectionField.textContent = this.collection.map(x => x.value).join("\n");
+        this.collectionField.value = this.collection.map(x => x.value).join("\n");
     }
 
     changeSpeed(speed) {
@@ -151,6 +152,14 @@ export default class SortingManager {
 
     stop() {
         this.#isRunning = false;
+    }
+
+    reset() {
+        this.stop();
+        for (let i = 0; i < this.collection.length; i++) {
+            this.collection[i].setState(NodeState.Idle);
+        }
+        this.updateCollectionField();
     }
 
     /**

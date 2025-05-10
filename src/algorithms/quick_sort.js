@@ -104,4 +104,21 @@ export default class QuickSort extends SortingAlgorithm {
 
         return this.#stack.length > 0;
     }
+
+    static get name() {
+        return "Quick Sort";
+    }
+
+    static get timeComplexity() {
+        return {
+            best: "O(n log n)",
+            average: "O(n log n)",
+            worst: "O(n²)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(log n)";
+    }
+
 }

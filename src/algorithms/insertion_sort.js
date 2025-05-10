@@ -61,4 +61,21 @@ export default class InsertionSort extends SortingAlgorithm {
 
         return true;
     }
+
+    static get name() {
+        return "Insertion Sort";
+    }
+
+    static get timeComplexity() {
+        return {
+            best: "O(n)",
+            average: "O(n²)",
+            worst: "O(n²)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(1)";
+    }
+
 }

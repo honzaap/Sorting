@@ -45,4 +45,20 @@ export default class BogoSort extends SortingAlgorithm {
 
         return true;
     }
+
+    static get name() {
+        return "Bogo Sort";
+    }
+
+    static get timeComplexity() {
+        return {
+            best: "O(n)",
+            average: "O(n·n!)",
+            worst: "O(∞)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(1)";
+    }
 }

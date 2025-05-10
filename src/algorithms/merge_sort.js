@@ -84,4 +84,21 @@ export default class MergeSort extends SortingAlgorithm {
         // Finished all tasks
         return false;
     }
+
+    static get name() {
+        return "Merge Sort";
+    }
+
+    static get timeComplexity() {
+        return {
+            best: "O(n log n)",
+            average: "O(n log n)",
+            worst: "O(n log n)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(n)";
+    }
+
 }

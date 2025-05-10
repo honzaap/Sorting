@@ -17,10 +17,14 @@
                         <img src="./arrow_right.svg" alt="Arrow"/>
                     </button>
                     <div class="select-options" id="selectAlgo">
-                        <button data-algo="test1">Bubble sort</button>
-                        <button data-algo="test2">Merge sort</button>
-                        <button data-algo="test3">Insert sort</button>
-                        <button data-algo="test4">Quick sort</button>
+                        <button data-algo="bubble">Bubble sort</button>
+                        <button data-algo="merge">Merge sort</button>
+                        <button data-algo="insert">Insert sort</button>
+                        <button data-algo="quick">Quick sort</button>
+                        <button data-algo="selection">Selection sort</button>
+                        <button data-algo="comb">Comb sort</button>
+                        <button data-algo="shaker">Shaker sort</button>
+                        <button data-algo="bogo">Bogo sort</button>
                     </div>
                     <span class="arrow"></span>
                 </div>
@@ -46,22 +50,22 @@
                 </div>
             </section>
             <section class="section-info">
-                <h3>Bubble sort</h3>
+                <h3 class="algo-name">Bubble sort</h3>
                 <div class="table" id="table">
                     <div class="part">
                         <div class="head">Time complexity</div>
                         <div class="content">
                             <div class="col">
                                 <div class="row">Best</div>
-                                <div class="row">O(n)</div>
+                                <div class="row tc-best">O(n)</div>
                             </div>
                             <div class="col">
                                 <div class="row">Average</div>
-                                <div class="row">O(n²)</div>
+                                <div class="row tc-average">O(n²)</div>
                             </div>
                             <div class="col">
                                 <div class="row">Worst</div>
-                                <div class="row">O(n²)</div>
+                                <div class="row tc-worst">O(n²)</div>
                             </div>
                         </div>
                     </div>
@@ -70,7 +74,7 @@
                         <div class="content">
                             <div class="col">
                                 <div class="row"></div>
-                                <div class="row">O(1)</div>
+                                <div class="row sc">O(1)</div>
                             </div>
                         </div>
                     </div>

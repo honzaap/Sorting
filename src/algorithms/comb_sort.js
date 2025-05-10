@@ -72,4 +72,21 @@ export default class CombSort extends SortingAlgorithm {
 
         return true;
     }
+
+    static get name() {
+        return "Comb Sort";
+    }
+
+    static get timeComplexity() {
+        return {
+            best: "O(n log n)",
+            average: "O(n²)",
+            worst: "O(n²)"
+        };
+    }
+
+    static get spaceComplexity() {
+        return "O(1)";
+    }
+
 }
