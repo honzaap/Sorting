@@ -97,7 +97,6 @@ export default class SortingManager {
         const collection = [];
         for (let i = 0; i < size; i++) {
             const number = existingCollection[i] ?? Math.floor(Math.random() * (max - min)) + min;
-            console.log(number);
             const node = new Node(number, width);
             collection.push(node);
         }
@@ -141,7 +140,7 @@ export default class SortingManager {
     }
 
     start() {
-        if (this.#isRunning || !this.#currentAlgorithm)
+        if (this.#isRunning || !this.#currentAlgorithm || this.collection.length === 0)
             return false;
 
         this.#isRunning = true;

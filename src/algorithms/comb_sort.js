@@ -88,5 +88,4 @@ export default class CombSort extends SortingAlgorithm {
     static get spaceComplexity() {
         return "O(1)";
     }
-
 }

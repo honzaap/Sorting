@@ -6,6 +6,7 @@ import SelectionSort from "./selection_sort";
 import QuickSort from "./quick_sort";
 import CombSort from "./comb_sort";
 import ShakerSort from "./shaker_sort";
+import ShellSort from "./shell_sort";
 
 export default {
     "bubble": BubbleSort,
@@ -15,5 +16,6 @@ export default {
     "selection": SelectionSort,
     "comb": CombSort,
     "shaker": ShakerSort,
+    "shell": ShellSort,
     "bogo": BogoSort,
 }
